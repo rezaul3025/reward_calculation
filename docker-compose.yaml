@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mysql_db:
+   container_name: mysql-db
+   image: mysql/mysql-server:5.7
+   environment:
+    MYSQL_DATABASE: reward
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_ROOT_HOST: '%'
+   ports:
+   - "3306:3306"
+   restart: always
+  
+  reward_service:
+    container_name: reward_service
+    #restart: always
+    build: ./reward_service
+    working_dir: /reward_service
+    volumes:
+      - ./reward_service:/reward_service
+      - ~/.m2:/root/.m2
+    ports:
+      - 7000:7000
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=dev
+    depends_on:
+      - mysql_db
+      
+  reward_service_test:
+    container_name: reward_service_test
+    #restart: always
+    build: ./reward_service_test
+    working_dir: /reward_service_test
+    volumes:
+      - ./reward_service_test:/reward_service_test
+      - ~/.m2:/root/.m2
+    ports:
+      - 8000:8000
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=dev
+    depends_on:
+      - reward_service
+      

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rewardServiceTestApp"
+      xmlns:th="http://www.springframework.org/schema/data/jaxb" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script th:src="@{/angular.min.js}"></script>
+    <script th:src="@{/rewardServiceTestController.js}"></script>
+</head>
+<body ng-controller="RewardServiceTestController">
+
+<table cellpadding="4">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Country ISO Code
+        </th>
+        <th>
+            Currency ISO Code
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+    </tr>
+    <tr ng-repeat="user in users">
+        <td>{{user.name}}</td>
+        <td>{{user.countryISOCode}}</td>
+        <td>{{user.currencyISOCode}}</td>
+        <td>
+           <button ng-click="initAddExercise(user)">Add Exercise</button>
+        </td>
+        <td>
+            <button ng-click="addReward(user.id)">Add Reward</button>
+        </td>
+    </tr>
+</table>
+
+<form  id="saveExerciseForm" ng-show="showSaveExerciseForm">
+    <table cellpadding="4">
+        <tr>
+            <td colspan="2">
+                <h3>Save exercise for {{selectedUser.name}}</h3>
+                <hr/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Steps : </label>
+            </td>
+            <td>
+                <input type="number" name="steps" ng-model="exercise.steps" placeholder="Enter steps">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Exercise type:</label>
+            </td>
+            <td>
+                <select name="type" ng-model="exercise.type">
+                    <option>RUNNING</option>
+                    <option>WALKING</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>User :</label>
+            </td>
+            <td>
+                {{selectedUser.name}}
+                <input >
+                <select name="type" ng-model="exercise.userId">
+                    <option value="1">Test</option>
+                    <option value="2">Test1</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {{exerciseSaveSuccessMessage}}
+                <button ng-click="saveExercise(exercise)">Save</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
+<!-- the result of the search will be rendered inside this div -->
+<div id="result"></div>
+</body>
+</html>
