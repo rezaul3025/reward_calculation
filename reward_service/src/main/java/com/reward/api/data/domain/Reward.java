@@ -1,6 +1,7 @@
 package com.reward.api.data.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,15 +16,18 @@ public class Reward {
    private Integer id;
 
    @Column(precision = 12, length=10, name="price_in_euro", scale = 4)
+   @JsonFormat(shape=JsonFormat.Shape.STRING)
    private BigDecimal priceInEuro;
 
    @Column(precision = 12, length=10, name="converted_price", scale = 4)
+   @JsonFormat(shape=JsonFormat.Shape.STRING)
    private BigDecimal convertedPrice;
 
    @Column(length=10, name="type")
    private RewardType type;
 
    @Column(name="date")
+   @JsonFormat(pattern = "yyyy-MM-dd HH:mm", locale = "de_DE")
    private Date date;
 
    @ManyToOne
@@ -33,7 +37,7 @@ public class Reward {
 
    @OneToOne
    @JoinColumn(name = "exercise_id", referencedColumnName = "id")
-   @JsonManagedReference
+   @JsonBackReference
    private Exercise exercise;
 
    public Reward(BigDecimal priceInEuro , BigDecimal convertedPrice, RewardType type, Date date)

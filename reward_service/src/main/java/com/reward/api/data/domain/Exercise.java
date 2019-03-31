@@ -1,6 +1,8 @@
 package com.reward.api.data.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +16,7 @@ public class Exercise
 
    private Integer steps;
 
+   @JsonFormat(pattern = "yyyy-MM-dd HH:mm", locale = "de_DE")
    private Date date;
 
    private ExerciseType type;
@@ -24,7 +27,7 @@ public class Exercise
    private User user;
 
    @OneToOne(mappedBy = "exercise")
-   @JsonBackReference
+   @JsonManagedReference
    private Reward reward;
 
    public Exercise()

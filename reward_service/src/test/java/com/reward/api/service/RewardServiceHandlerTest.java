@@ -58,11 +58,11 @@ public class RewardServiceHandlerTest extends TestConfig {
     }
 
     private void createExerciseForUser(User user){
-        Exercise exercise= new Exercise(1200, new Date(), ExerciseType.WALKING, false);
+        Exercise exercise= new Exercise(1200, new Date(), ExerciseType.WALKING);
         exercise.setUser(user);
         exerciseRepository.save(exercise);
 
-        Exercise exercise1= new Exercise(900, new Date(), ExerciseType.WALKING, false);
+        Exercise exercise1= new Exercise(900, new Date(), ExerciseType.WALKING);
         exercise1.setUser(user);
         exerciseRepository.save(exercise1);
 

@@ -58,11 +58,11 @@ public class RewardServiceHandler implements RewardService {
 
             exerciseRepository.saveAndFlush(exercise);
 
-           Reward reward= calculateForExercise(exercise.getId());
+            Reward reward= calculateForExercise(exercise.getId());
 
-           if(reward !=  null){
+            if(reward !=  null){
                rewards.add(reward);
-           }
+            }
         }
 
         return rewards;
@@ -98,6 +98,7 @@ public class RewardServiceHandler implements RewardService {
     public List<Reward> findByUser(Integer userId) {
         User user = userService.findById(userId);
 
+        List<Reward> res = rewardRepository.findByUser(user);
         return rewardRepository.findByUser(user);
 
     }

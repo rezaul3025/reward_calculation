@@ -40,25 +40,25 @@ module.controller('RewardServiceTestController', ['$http', '$scope', function ($
 
     }
 
-    $scope.calculateRewardForUser = function(userId){
+    $scope.calculateRewardForUser = function(user){
         $http({
-            method: "GET",
-            url: REST_BASE_URL+CALCULATE_REWARD_FOR_USER_URL+'/'+userId,
-            params: {}
+            method: "POST",
+            url: REST_BASE_URL+CALCULATE_REWARD_FOR_USER_URL+'/'+user.id,
+            data: {}
         }).then(function succes(response) {
             if(typeof  response.data !== 'undefined' && response.data.length > 0) {
                 $scope.calculatedRewards = response.data;
-                $scope.selectedUser = userId;
+                $scope.selectedUser = user;
             }
 
         }, function error(response) {
         });
     }
 
-    $scope.showExerciseAndRewardForUser = function(userId){
+    $scope.showExerciseAndRewardForUser = function(user){
         $http({
             method: "GET",
-            url: REST_BASE_URL+FIND_EXERCISE_FOR_USER_URL+'/'+userId,
+            url: REST_BASE_URL+FIND_EXERCISE_FOR_USER_URL+'/'+user.id,
             params: {}
         }).then(function succes(response) {
             if(typeof  response.data !== 'undefined' && response.data.length > 0) {
