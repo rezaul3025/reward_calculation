@@ -39,9 +39,9 @@ public class ConverterServiceHandlerTest
    }
 
    @Test
-   public void convert()
+   public void convertTest()
    {
-      BigDecimal amount = new BigDecimal(100.00);
+      BigDecimal amount = new BigDecimal(100);
       BigDecimal val =converterServiceHandler.convert(amount, "EUR", "GBP");
 
       assertThat(val).isNotNull();
@@ -49,7 +49,17 @@ public class ConverterServiceHandlerTest
    }
 
    @Test
-   public void convertToUSD()
+   public void convertCheckSameCurrencyTest()
+   {
+      BigDecimal amount = new BigDecimal(100);
+      BigDecimal val =converterServiceHandler.convert(amount, "EUR", "EUR");
+
+      assertThat(val).isNotNull();
+      assertThat(val.doubleValue()).isEqualTo(100);
+   }
+
+   @Test
+   public void convertToUsdTest()
    {
       BigDecimal amount = converterServiceHandler.convertToUSD(new BigDecimal(200.00), "BDT");
 
