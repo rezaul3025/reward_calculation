@@ -25,6 +25,10 @@ public class ConverterServiceHandler implements ConverterService
    @Override
    public BigDecimal convert(@NotNull BigDecimal value, @NotNull String fromCurrency, @NotNull String toCurrency)
    {
+      if(fromCurrency.equals(toCurrency)){
+         return value;
+      }
+
       BigDecimal usdValue = convertToUSD(value, fromCurrency);
 
       BigDecimal rate = exchangeRateService.getExchangeRateOf(toCurrency);
@@ -33,7 +37,7 @@ public class ConverterServiceHandler implements ConverterService
    }
 
    @Override
-   public BigDecimal convertToUSD(BigDecimal value, String currency)
+   public BigDecimal convertToUSD(@NotNull BigDecimal value, @NotNull String currency)
    {
       BigDecimal rate = exchangeRateService.getExchangeRateOf(currency);
 
