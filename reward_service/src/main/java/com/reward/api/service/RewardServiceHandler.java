@@ -98,9 +98,7 @@ public class RewardServiceHandler implements RewardService {
     public List<Reward> findByUser(Integer userId) {
         User user = userService.findById(userId);
 
-        List<Reward> res = rewardRepository.findByUser(user);
         return rewardRepository.findByUser(user);
-
     }
 
     private BigDecimal calculatePrice(BigDecimal priceInOneStep, Integer totalSteps) {

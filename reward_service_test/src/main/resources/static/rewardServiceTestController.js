@@ -31,6 +31,7 @@ module.controller('RewardServiceTestController', ['$http', '$scope', function ($
             {
                 $scope.exerciseSaveSuccessMessage = "Exercise saved successfully!"
                 $scope.exerciseSaveErrorMessage = '';
+                $scope.exercise = {};
             }
 
         }, function error(response) {
@@ -64,6 +65,9 @@ module.controller('RewardServiceTestController', ['$http', '$scope', function ($
             if(typeof  response.data !== 'undefined' && response.data.length > 0) {
                 $scope.exercises = response.data;
                 $scope.selectedUser = user;
+            }
+            else{
+                $scope.exercises = [];
             }
 
         }, function error(response) {

@@ -7,10 +7,14 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script th:src="@{/angular.min.js}"></script>
     <script th:src="@{/rewardServiceTestController.js}"></script>
+
+    <link th:href="@{/bootstrap.min.css}" rel="stylesheet" />
+
 </head>
 <body ng-controller="RewardServiceTestController">
 
-<table cellpadding="4">
+<h3>User(s)</h3>
+<table cellpadding="4" class="table">
     <tr>
         <th>
             Name
@@ -33,13 +37,13 @@
         <td>{{user.countryISOCode}}</td>
         <td>{{user.currencyISOCode}}</td>
         <td>
-           <button ng-click="initAddExercise(user)">Add Exercise</button>
+           <button class="btn btn-primary" ng-click="initAddExercise(user)">Add Exercise</button>
         </td>
         <td>
-            <button ng-click="calculateRewardForUser(user)">Calculate Reward</button>
+            <button class="btn btn-primary" ng-click="calculateRewardForUser(user)">Calculate Reward</button>
         </td>
         <td>
-            <a href="#" ng-click="showExerciseAndRewardForUser(user)">Show exercise & reward </a>
+            <button class="btn btn-primary" href="#" ng-click="showExerciseAndRewardForUser(user)">Show exercise & reward </button>
         </td>
     </tr>
     <tr ng-show="calculatedRewards">
@@ -62,7 +66,7 @@
     <table cellpadding="4">
         <tr>
             <td colspan="2">
-                <h3>Save exercise for {{selectedUser.name}}</h3>
+                <h3>Add exercise for user :  {{selectedUser.name}}</h3>
                 <hr/>
             </td>
         </tr>
@@ -71,18 +75,7 @@
                 <label>Steps : </label>
             </td>
             <td>
-                <input type="number" name="steps" ng-model="exercise.steps" placeholder="Enter steps">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Exercise type:</label>
-            </td>
-            <td>
-                <select name="type" ng-model="exercise.type">
-                    <option>RUNNING</option>
-                    <option>WALKING</option>
-                </select>
+                <input type="number" name="steps" ng-model="exercise.steps" placeholder="Enter steps" required="true">
             </td>
         </tr>
         <tr>
@@ -97,55 +90,60 @@
             <td colspan="2">
                 {{exerciseSaveSuccessMessage}}
                 {{exerciseSaveErrorMessage}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
                 <button ng-click="saveExercise(exercise)">Save</button>
             </td>
         </tr>
     </table>
 
 </form>
-
-<h3>Exercises & Rewards <span ng-show="">for user: {{}} </span></h3>
-<table cellpadding="4">
-    <tr>
-        <th>
-            Steps
-        </th>
-        <th>
-            Date
-        </th>
-        <th>
-            Type
-        </th>
-        <th>
-            Reward type
-        </th>
-        <th>
-            Reward in EUR
-        </th>
-        <th>
-            Reward in {{selectedUser.currencyISOCode}}
-        </th>
-    </tr>
-    <tr ng-repeat="exercise in exercises">
-        <td>
-            {{exercise.steps}}
-        </td>
-        <td>
-            {{exercise.date}}
-        </td>
-        <td>
-            {{exercise.type}}
-        </td>
-        <td>
-            {{exercise.reward.type}}
-        </td>
-        <td>
-            {{exercise.reward.priceInEuro}}
-        </td>
-        <td>
-            {{exercise.reward.convertedPrice}}
-        </td>
-    </tr>
-</table>
+<div ng-show="exercises">
+    <h3>Exercises & Rewards <span ng-show="">for user: {{}} </span></h3>
+        <table cellpadding="4" class="table">
+            <tr>
+                <th>
+                    Steps
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Reward type
+                </th>
+                <th>
+                    Reward in EUR
+                </th>
+                <th>
+                    Reward in {{selectedUser.currencyISOCode}}
+                </th>
+            </tr>
+            <tr ng-repeat="exercise in exercises">
+                <td>
+                    {{exercise.steps}}
+                </td>
+                <td>
+                    {{exercise.date}}
+                </td>
+                <td>
+                    {{exercise.type}}
+                </td>
+                <td>
+                    {{exercise.reward.type}}
+                </td>
+                <td>
+                    {{exercise.reward.priceInEuro}}
+                </td>
+                <td>
+                {{exercise.reward.convertedPrice}}
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

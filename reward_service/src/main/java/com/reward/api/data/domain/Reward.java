@@ -2,7 +2,8 @@ package com.reward.api.data.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.reward.api.utils.MoneyJsonSerializer;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,11 +17,11 @@ public class Reward {
    private Integer id;
 
    @Column(precision = 12, length=10, name="price_in_euro", scale = 4)
-   @JsonFormat(shape=JsonFormat.Shape.STRING)
+   @JsonSerialize(using = MoneyJsonSerializer.class)
    private BigDecimal priceInEuro;
 
    @Column(precision = 12, length=10, name="converted_price", scale = 4)
-   @JsonFormat(shape=JsonFormat.Shape.STRING)
+   @JsonSerialize(using = MoneyJsonSerializer.class)
    private BigDecimal convertedPrice;
 
    @Column(length=10, name="type")

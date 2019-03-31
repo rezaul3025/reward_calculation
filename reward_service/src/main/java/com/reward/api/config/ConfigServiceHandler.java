@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 @Configuration
 public class ConfigServiceHandler implements ConfigService{
 
-    private final MathContext DEFAULT_CONTEXT = new MathContext(12, RoundingMode.HALF_DOWN);
+    private final MathContext DEFAULT_CONTEXT = new MathContext(12, RoundingMode.HALF_UP);
 
     @Value("${reward.price.per1000.steps}")
     BigDecimal rewardPricePer1000Steps;
