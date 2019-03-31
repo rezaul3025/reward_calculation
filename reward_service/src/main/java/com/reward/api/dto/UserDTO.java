@@ -1,7 +1,5 @@
 package com.reward.api.dto;
 
-import javax.persistence.Column;
-
 public class UserDTO {
 
     private String name;

@@ -1,9 +1,9 @@
 package com.reward.api.service;
 
 import com.reward.api.data.domain.User;
+import com.reward.api.data.repository.UserRepository;
 import com.reward.api.dto.UserDTO;
 import com.reward.api.exception.UserNotFoundException;
-import com.reward.api.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

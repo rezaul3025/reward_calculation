@@ -19,19 +19,14 @@ public class RewardController {
 	public RewardController(RewardService rewardService){
 		this.rewardService = rewardService;
 	}
-	
-	@GetMapping(value="")
-	public String reward() {
-		return "Reward";
-	}
 
 	@PostMapping(value = "/user/{id}")
-	public ResponseEntity<List<Reward>> calculate(@PathVariable("id") Integer userId){
+	public ResponseEntity<List<Reward>> calculateForUser(@PathVariable("id") Integer userId){
 		return new ResponseEntity<>(rewardService.calculateForUser(userId), HttpStatus.CREATED);
 	}
 
 	@GetMapping(value = "/user/{id}")
 	public ResponseEntity<List<Reward>> findByUser(@PathVariable("id") Integer userId){
-		return new ResponseEntity<>(rewardService.findByUser(userId), HttpStatus.OK);
+			return new ResponseEntity<>(rewardService.findByUser(userId), HttpStatus.OK);
 	}
 }

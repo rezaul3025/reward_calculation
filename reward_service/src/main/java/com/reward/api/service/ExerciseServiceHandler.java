@@ -2,8 +2,8 @@ package com.reward.api.service;
 
 import com.reward.api.data.domain.Exercise;
 import com.reward.api.data.domain.User;
-import com.reward.api.dto.ExerciseDTO;
 import com.reward.api.data.repository.ExerciseRepository;
+import com.reward.api.dto.ExerciseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

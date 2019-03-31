@@ -29,8 +29,7 @@ public class ExerciseController {
 
     @GetMapping
     public ResponseEntity<List<Exercise>> findAll(){
-        return new ResponseEntity<>(exerciseService.findAll(),  HttpStatus.OK
-        );
+        return new ResponseEntity<>(exerciseService.findAll(),  HttpStatus.OK);
     }
 
     @GetMapping(value = "/user/{id}")

@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 @Service
 public class ConverterServiceHandler implements ConverterService

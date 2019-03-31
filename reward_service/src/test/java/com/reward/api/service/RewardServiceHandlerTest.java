@@ -6,17 +6,19 @@ import com.reward.api.data.domain.ExerciseType;
 import com.reward.api.data.domain.Reward;
 import com.reward.api.data.domain.User;
 import com.reward.api.data.repository.ExerciseRepository;
-import com.reward.api.data.repository.RewardRepository;
 import com.reward.api.data.repository.UserRepository;
-import com.reward.api.service.currency.ConverterService;
+import com.reward.api.service.external.OpenExchangeApiService;
+import com.reward.api.service.external.mock.MockOpenExchangeApiService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 
 public class RewardServiceHandlerTest extends TestConfig {
@@ -25,16 +27,16 @@ public class RewardServiceHandlerTest extends TestConfig {
     private UserRepository userRepository;
 
     @Autowired
-    private RewardRepository rewardRepository;
-
-    @Autowired
     private ExerciseRepository exerciseRepository;
 
     @Autowired
-    private ConverterService converterService;
+    private RewardService rewardService;
 
     @Autowired
-    private RewardService rewardService;
+    private MockOpenExchangeApiService mockOpenExchangeApiService;
+
+    @MockBean
+    OpenExchangeApiService openExchangeApiService;
 
     private User user;
 
@@ -43,13 +45,22 @@ public class RewardServiceHandlerTest extends TestConfig {
         user =  createUser();
 
         createExerciseForUser(user);
+
+        when(openExchangeApiService.getExchangeRateApiResponse()).thenReturn(mockOpenExchangeApiService.getExchangeRateApiResponse());
     }
 
     @Test
-    public void calculateTest() {
+    public void calculateForUserTest() {
         List<Reward> rewards = rewardService.calculateForUser(user.getId());
 
         assertThat(rewards).isNotNull().hasSize(2);
+        assertThat(rewards.get(0)).isNotNull();
+        assertThat(rewards.get(0).getPriceInEuro().doubleValue()).isNotNull().isEqualTo(1.200);
+        assertThat(rewards.get(0).getConvertedPrice().doubleValue()).isNotNull().isEqualTo(1.02411715708);
+
+        assertThat(rewards.get(1)).isNotNull();
+        assertThat(rewards.get(1).getPriceInEuro().doubleValue()).isNotNull().isEqualTo(0.900);
+        assertThat(rewards.get(1).getConvertedPrice().doubleValue()).isNotNull().isEqualTo(0.768087867809);
     }
 
     private User createUser(){

@@ -5,9 +5,9 @@ import com.reward.api.data.domain.Exercise;
 import com.reward.api.data.domain.Reward;
 import com.reward.api.data.domain.RewardType;
 import com.reward.api.data.domain.User;
-import com.reward.api.exception.ExerciseNotFoundException;
 import com.reward.api.data.repository.ExerciseRepository;
 import com.reward.api.data.repository.RewardRepository;
+import com.reward.api.exception.ExerciseNotFoundException;
 import com.reward.api.service.currency.ConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,8 +55,6 @@ public class RewardServiceHandler implements RewardService {
             if(exercise.getReward() != null){
                 continue;
             }
-
-            exerciseRepository.saveAndFlush(exercise);
 
             Reward reward= calculateForExercise(exercise.getId());
 
