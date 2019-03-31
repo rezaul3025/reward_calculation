@@ -1,4 +1,4 @@
-package com.reward.api.domain;
+package com.reward.api.data.domain;
 
 public enum RewardType
 {

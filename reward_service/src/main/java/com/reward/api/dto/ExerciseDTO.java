@@ -1,6 +1,6 @@
 package com.reward.api.dto;
 
-import com.reward.api.domain.ExerciseType;
+import com.reward.api.data.domain.ExerciseType;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -14,10 +14,7 @@ public class ExerciseDTO {
 
     private Date date;
 
-    @NotNull(message = "Exercise Type cannot be null")
-    private ExerciseType type;
-
-    private Boolean isRewarded;
+    private ExerciseType type =  ExerciseType.RUNNING;
 
     private Integer userId;
 
@@ -43,14 +40,6 @@ public class ExerciseDTO {
 
     public void setType(ExerciseType type) {
         this.type = type;
-    }
-
-    public Boolean getRewarded() {
-        return isRewarded;
-    }
-
-    public void setRewarded(Boolean rewarded) {
-        isRewarded = rewarded;
     }
 
     public Integer getUserId() {

@@ -1,4 +1,7 @@
-package com.reward.api.domain;
+package com.reward.api.data.domain;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -25,10 +28,12 @@ public class Reward {
 
    @ManyToOne
    @JoinColumn(name = "user_id", referencedColumnName = "id")
+   @JsonBackReference
    private User user;
 
    @OneToOne
    @JoinColumn(name = "exercise_id", referencedColumnName = "id")
+   @JsonManagedReference
    private Exercise exercise;
 
    public Reward(BigDecimal priceInEuro , BigDecimal convertedPrice, RewardType type, Date date)

@@ -1,21 +1,17 @@
 package com.reward.api.service;
 
 import com.reward.api.TestConfig;
-import com.reward.api.domain.Exercise;
-import com.reward.api.domain.ExerciseType;
-import com.reward.api.domain.Reward;
-import com.reward.api.domain.User;
-import com.reward.api.repository.ExerciseRepository;
-import com.reward.api.repository.RewardRepository;
-import com.reward.api.repository.UserRepository;
+import com.reward.api.data.domain.Exercise;
+import com.reward.api.data.domain.ExerciseType;
+import com.reward.api.data.domain.Reward;
+import com.reward.api.data.domain.User;
+import com.reward.api.data.repository.ExerciseRepository;
+import com.reward.api.data.repository.RewardRepository;
+import com.reward.api.data.repository.UserRepository;
 import com.reward.api.service.currency.ConverterService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
@@ -51,7 +47,7 @@ public class RewardServiceHandlerTest extends TestConfig {
 
     @Test
     public void calculateTest() {
-        List<Reward> rewards = rewardService.calculate(user.getId());
+        List<Reward> rewards = rewardService.calculateForUser(user.getId());
 
         assertThat(rewards).isNotNull().hasSize(2);
     }

@@ -25,6 +25,8 @@
         </th>
         <th>
         </th>
+        <th>
+        </th>
     </tr>
     <tr ng-repeat="user in users">
         <td>{{user.name}}</td>
@@ -34,7 +36,24 @@
            <button ng-click="initAddExercise(user)">Add Exercise</button>
         </td>
         <td>
-            <button ng-click="addReward(user.id)">Add Reward</button>
+            <button ng-click="calculateRewardForUser(user.id)">Calculate Reward</button>
+        </td>
+        <td>
+            <a href="#" ng-click="showExerciseAndRewardForUser(user.id)">Show exercise & reward </a>
+        </td>
+    </tr>
+    <tr ng-show="calculatedRewards">
+        <td colspan="5">
+            <b>Following reward(s) calculated for user: {{selectedUser.name}}</b>
+            <table cellpadding="2">
+                <tr>
+                    <td>priceInEuro</td><td>convertedPrice</td><td>type</td><td>date</td>
+                </tr>
+                <tr ng-repeat="reward in calculatedRewards">
+                    <td>{{reward.priceInEuro}}</td><td>{{reward.convertedPrice}}</td>
+                    <td>{{reward.type}}</td><td>{{reward.date}}</td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>
@@ -72,23 +91,61 @@
             </td>
             <td>
                 {{selectedUser.name}}
-                <input >
-                <select name="type" ng-model="exercise.userId">
-                    <option value="1">Test</option>
-                    <option value="2">Test1</option>
-                </select>
             </td>
         </tr>
         <tr>
             <td colspan="2">
                 {{exerciseSaveSuccessMessage}}
+                {{exerciseSaveErrorMessage}}
                 <button ng-click="saveExercise(exercise)">Save</button>
             </td>
         </tr>
     </table>
 
 </form>
-<!-- the result of the search will be rendered inside this div -->
-<div id="result"></div>
+
+<h3>Exercises & Rewards <span ng-show="">for user: {{}} </span></h3>
+<table cellpadding="4">
+    <tr>
+        <th>
+            Steps
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Reward type
+        </th>
+        <th>
+            Reward in EUR
+        </th>
+        <th>
+            Reward in {{selectedUser.currencyISOCode}}
+        </th>
+    </tr>
+    <tr ng-repeat="exercise in exercises">
+        <td>
+            {{exercise.steps}}
+        </td>
+        <td>
+            {{exercise.date}}
+        </td>
+        <td>
+            {{exercise.type}}
+        </td>
+        <td>
+            {{exercise.reward.type}}
+        </td>
+        <td>
+            {{exercise.reward.priceInEuro}}
+        </td>
+        <td>
+            {{exercise.reward.convertedPrice}}
+        </td>
+    </tr>
+</table>
 </body>
 </html>

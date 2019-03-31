@@ -1,6 +1,8 @@
-package com.reward.api.domain;
+package com.reward.api.data.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.reward.api.data.domain.Exercise;
+import com.reward.api.data.domain.Reward;
 
 import javax.persistence.*;
 import java.util.List;

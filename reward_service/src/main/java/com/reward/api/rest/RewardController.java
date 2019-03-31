@@ -1,6 +1,6 @@
 package com.reward.api.rest;
 
-import com.reward.api.domain.Reward;
+import com.reward.api.data.domain.Reward;
 import com.reward.api.service.RewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +30,6 @@ public class RewardController {
 
 	@GetMapping(value = "/user/{id}")
 	public ResponseEntity<List<Reward>> calculate(@PathVariable("id") Integer userId){
-		return new ResponseEntity<>(rewardService.calculate(userId), HttpStatus.OK);
+		return new ResponseEntity<>(rewardService.calculateForUser(userId), HttpStatus.OK);
 	}
 }

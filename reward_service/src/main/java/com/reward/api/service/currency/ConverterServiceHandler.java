@@ -1,5 +1,6 @@
 package com.reward.api.service.currency;
 
+import com.reward.api.config.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +12,13 @@ import java.math.RoundingMode;
 @Service
 public class ConverterServiceHandler implements ConverterService
 {
+   private ConfigService configService;
+
    private ExchangeRateService exchangeRateService;
 
-   private final MathContext DEFAULT_CONTEXT = new MathContext(12, RoundingMode.HALF_DOWN);
-
-
    @Autowired
-   public ConverterServiceHandler(ExchangeRateService exchangeRateService){
+   public ConverterServiceHandler(ConfigService configService, ExchangeRateService exchangeRateService){
+      this.configService = configService;
       this.exchangeRateService = exchangeRateService;
    }
 
@@ -28,7 +29,7 @@ public class ConverterServiceHandler implements ConverterService
 
       BigDecimal rate = exchangeRateService.getExchangeRateOf(toCurrency);
 
-      return  usdValue.multiply(rate, DEFAULT_CONTEXT);
+      return  usdValue.multiply(rate, configService.getDefaultContext());
    }
 
    @Override
@@ -36,9 +37,9 @@ public class ConverterServiceHandler implements ConverterService
    {
       BigDecimal rate = exchangeRateService.getExchangeRateOf(currency);
 
-      BigDecimal currencyBasedRate =  BigDecimal.ONE.divide(rate, DEFAULT_CONTEXT);
+      BigDecimal currencyBasedRate =  BigDecimal.ONE.divide(rate, configService.getDefaultContext());
 
-      return value.multiply(currencyBasedRate, DEFAULT_CONTEXT);
+      return value.multiply(currencyBasedRate, configService.getDefaultContext());
    }
 
 }

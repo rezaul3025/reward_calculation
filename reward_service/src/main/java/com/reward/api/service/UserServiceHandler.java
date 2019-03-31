@@ -1,8 +1,9 @@
 package com.reward.api.service;
 
-import com.reward.api.domain.User;
+import com.reward.api.data.domain.User;
 import com.reward.api.dto.UserDTO;
-import com.reward.api.repository.UserRepository;
+import com.reward.api.exception.UserNotFoundException;
+import com.reward.api.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +24,15 @@ public class UserServiceHandler implements UserService {
 
         return userRepository.save(user);
     }
+
+    @Override
+    public User findById(Integer id) {
+        User user = userRepository.findById(id).orElse(null);
+
+        if (user == null) {
+            throw new UserNotFoundException(String.format("User not found for given id: %s", id));
+        }
+        return user;    }
+
+
 }

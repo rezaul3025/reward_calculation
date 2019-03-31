@@ -1,7 +1,7 @@
-package com.reward.api.repository;
+package com.reward.api.data.repository;
 
-import com.reward.api.domain.Exercise;
-import com.reward.api.domain.User;
+import com.reward.api.data.domain.Exercise;
+import com.reward.api.data.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

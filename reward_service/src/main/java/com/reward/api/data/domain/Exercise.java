@@ -1,4 +1,4 @@
-package com.reward.api.domain;
+package com.reward.api.data.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -12,13 +12,11 @@ public class Exercise
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer id;
 
-   private Integer step;
+   private Integer steps;
 
    private Date date;
 
    private ExerciseType type;
-
-   private Boolean isRewarded;
 
    @ManyToOne
    @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -26,6 +24,7 @@ public class Exercise
    private User user;
 
    @OneToOne(mappedBy = "exercise")
+   @JsonBackReference
    private Reward reward;
 
    public Exercise()
@@ -33,12 +32,11 @@ public class Exercise
 
    }
 
-   public Exercise(Integer step, Date date, ExerciseType type, Boolean isRewarded)
+   public Exercise(Integer steps, Date date, ExerciseType type)
    {
-      this.step = step;
+      this.steps = steps;
       this.date = date;
       this.type = type;
-      this.isRewarded = isRewarded;
    }
 
    public Integer getId()
@@ -51,14 +49,14 @@ public class Exercise
       this.id = id;
    }
 
-   public Integer getStep()
+   public Integer getSteps()
    {
-      return step;
+      return steps;
    }
 
-   public void setStep(Integer step)
+   public void setSteps(Integer steps)
    {
-      this.step = step;
+      this.steps = steps;
    }
 
    public Date getDate()
@@ -89,14 +87,6 @@ public class Exercise
    public void setUser(User user)
    {
       this.user = user;
-   }
-
-   public Boolean getRewarded() {
-      return isRewarded;
-   }
-
-   public void setRewarded(Boolean rewarded) {
-      isRewarded = rewarded;
    }
 
    public Reward getReward() {

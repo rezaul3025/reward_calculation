@@ -1,4 +1,4 @@
-package com.reward.api.config;
+package com.reward.api.data;
 
 import com.reward.api.dto.UserDTO;
 import com.reward.api.service.UserService;
