@@ -252,6 +252,6 @@ Note :
 
     - Two test users are created during service startup at -> com.reward.api.data.InitialDataGeneration.java
     - This users are create only when dev or test profile is active
-    - Opern exchange service is mock for testing and mock is available when active profile is test at -> com.reward.api.service.external.mock.MockOpenExchangeApiService.java 
-    - Real Opern exchange service is available when dev profile is active and dev profile is activated when services running using docker-compose
+    - Open exchange service is mock for testing and mock is available when active profile is test at -> com.reward.api.service.external.mock.MockOpenExchangeApiService.java 
+    - Real Open exchange service is available when dev profile is active and dev profile is activated when services running using docker-compose
                              
