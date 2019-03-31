@@ -8,7 +8,8 @@ module.controller('RewardServiceTestController', ['$http', '$scope', function ($
     var FIND_EXERCISE_FOR_USER_URL = '/exercises/user'
 
     $scope.users= [{"id":1, "name":"test", "countryISOCode":"UK", "currencyISOCode":"GBP" },
-                    {"id":2, "name":"test1", "countryISOCode":"DE", "currencyISOCode":"EUR" }]
+                    {"id":2, "name":"test1", "countryISOCode":"DE", "currencyISOCode":"EUR" },
+                    {"id":3, "name":"test2", "countryISOCode":"BD", "currencyISOCode":"BDT" }]
 
     $scope.initAddExercise = function(user){
         $scope.selectedUser = user;

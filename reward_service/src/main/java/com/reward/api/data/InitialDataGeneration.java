@@ -24,5 +24,7 @@ public class InitialDataGeneration {
     {
         userService.add(new UserDTO("test", "UK", "GBP"));
         userService.add(new UserDTO("test1", "DE", "EUR"));
+        userService.add(new UserDTO("test2", "BD", "BDT"));
+
     }
 }
