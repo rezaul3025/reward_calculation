@@ -41,11 +41,18 @@ public class RewardServiceHandler implements RewardService {
         this.converterService = converterService;
     }
 
+    /**
+     * Calculate reward for given user
+     *
+     * @param userId
+     * @return
+     */
     @Override
     public List<Reward> calculateForUser(Integer userId) {
 
         User user = userService.findById(userId);
 
+        //Find all exercises for reward calculation
         List<Exercise> exercises = exerciseRepository.findByUser(user);
 
         List<Reward> rewards = new ArrayList<>();
@@ -56,6 +63,7 @@ public class RewardServiceHandler implements RewardService {
                 continue;
             }
 
+            //Get reward for each exercise
             Reward reward= calculateForExercise(exercise.getId());
 
             if(reward !=  null){
@@ -66,6 +74,12 @@ public class RewardServiceHandler implements RewardService {
         return rewards;
     }
 
+    /**
+     * Calculate reward for each exercise
+     *
+     * @param exerciseId
+     * @return
+     */
     @Override
     public Reward calculateForExercise(Integer exerciseId) {
 
@@ -75,10 +89,13 @@ public class RewardServiceHandler implements RewardService {
             throw new ExerciseNotFoundException(String.format("Exercise not found for the id : %s", exerciseId));
         }
 
+        //Find price in one step
         BigDecimal priceInOneStep = getPriceInOneStep();
 
+        //Calculate price
         BigDecimal price = calculatePrice(priceInOneStep, exercise.getSteps());
 
+        //Generate reward
         Reward reward = generateReward(price, exercise.getUser());
 
         if(reward == null){
@@ -92,6 +109,11 @@ public class RewardServiceHandler implements RewardService {
         return reward;
     }
 
+    /**
+     *
+     * @param userId
+     * @return
+     */
     @Override
     public List<Reward> findByUser(Integer userId) {
         User user = userService.findById(userId);

@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 @Profile("test")
 public class MockOpenExchangeApiService {
 
+    /**
+     * Get mock ExchangeRateApiResponse for testing purpose
+     *
+     * @return
+     */
     public ResponseEntity<String> getExchangeRateApiResponse(){
         return ResponseEntity.ok(apiResponse);
     }

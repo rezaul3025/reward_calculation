@@ -20,6 +20,14 @@ public class ConverterServiceHandler implements ConverterService
       this.exchangeRateService = exchangeRateService;
    }
 
+   /**
+    *
+    * @param value
+    * @param fromCurrency
+    * @param toCurrency
+    * @return
+    */
+
    @Override
    public BigDecimal convert(@NotNull BigDecimal value, @NotNull String fromCurrency, @NotNull String toCurrency)
    {
@@ -34,13 +42,25 @@ public class ConverterServiceHandler implements ConverterService
       return  usdValue.multiply(rate, configService.getDefaultContext());
    }
 
+   /**
+    * Convert to USD is needed because open exchange API free plan only provide USD based exchange rate, So we can use
+    * USD exchange rate in order find given currency rate
+    *
+    * @param value
+    * @param currency
+    * @return
+    */
+
    @Override
    public BigDecimal convertToUSD(@NotNull BigDecimal value, @NotNull String currency)
    {
+      //Get USD based rate
       BigDecimal rate = exchangeRateService.getExchangeRateOf(currency);
 
+      //Find given currency rate
       BigDecimal currencyBasedRate =  BigDecimal.ONE.divide(rate, configService.getDefaultContext());
 
+      //Covert to USD
       return value.multiply(currencyBasedRate, configService.getDefaultContext());
    }
 

@@ -26,6 +26,9 @@ public class ExchangeRateServiceHandler implements  ExchangeRateService
    }
 
 
+   /**
+    * Update exchange rate every hour
+    */
    @Override
    @Scheduled(cron = "0 0/60 * * * ?")
    public void getExchangeRates()
@@ -48,9 +51,16 @@ public class ExchangeRateServiceHandler implements  ExchangeRateService
       LOG.info("Exchange rates updated successfully");
    }
 
+   /**
+    * Get exchange rate of given currency
+    *
+    * @param currency
+    * @return
+    */
    @Override
    public BigDecimal getExchangeRateOf(@NotNull String currency)
    {
+      //Call exchange API directly, when its not available
       if(exchangeRateMap.isEmpty()) {
          getExchangeRates();
       }

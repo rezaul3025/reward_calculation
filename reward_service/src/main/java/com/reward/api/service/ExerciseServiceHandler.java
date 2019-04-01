@@ -23,6 +23,11 @@ public class ExerciseServiceHandler implements ExerciseService {
         this.userService = userService;
     }
 
+    /**
+     *
+     * @param exerciseDTO
+     * @return
+     */
     @Override
     public Exercise createExercise(ExerciseDTO exerciseDTO) {
 
@@ -37,11 +42,20 @@ public class ExerciseServiceHandler implements ExerciseService {
         return exerciseRepository.saveAndFlush(exercise);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List<Exercise> findAll() {
         return exerciseRepository.findAll();
     }
 
+    /**
+     *
+     * @param userId
+     * @return
+     */
     @Override
     public List<Exercise> findByUser(Integer userId) {
 
